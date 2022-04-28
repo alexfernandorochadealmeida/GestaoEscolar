@@ -72,11 +72,11 @@ public class AtividadeDTO {
 
     public Atividade toAtividade(DisciplinaRepository disciplinaRepository) {
 
-        if(titulo.isBlank()) throw new IllegalArgumentException("O campo título está vazio");
-        if(link.isBlank()) throw new IllegalArgumentException("O campo link está vazio");
-        if(pontuacao.isBlank()) throw new IllegalArgumentException("O campo pontuação está vazio");
+        if(titulo.isEmpty()) throw new IllegalArgumentException("O campo título está vazio");
+        if(link.isEmpty()) throw new IllegalArgumentException("O campo link está vazio");
+        if(pontuacao.isEmpty()) throw new IllegalArgumentException("O campo pontuação está vazio");
         if(!link.startsWith("https://")) throw new IllegalArgumentException("Link inválido (Exemplo: https://site.com)");
-        if(disciplina.isBlank()) throw new IllegalArgumentException("É necessário que escolha uma disciplina");
+        if(disciplina.isEmpty()) throw new IllegalArgumentException("É necessário que escolha uma disciplina");
 
         Long idDaDisciplina = Long.parseLong(disciplina);
 
@@ -85,7 +85,7 @@ public class AtividadeDTO {
         
         atividade.setNome(titulo);
 
-        if(!descricao.isBlank()) atividade.setDescricao(descricao);
+        if(!descricao.isEmpty()) atividade.setDescricao(descricao);
         
         atividade.setUrl(link);
         atividade.setDisciplina(disciplina.get());
@@ -102,11 +102,11 @@ public class AtividadeDTO {
         String email = auth.getName();
         User professor = userRepository.findByEmail(email);
 
-        if(titulo.isBlank()) throw new IllegalArgumentException("O campo título está vazio");
-        if(link.isBlank()) throw new IllegalArgumentException("O campo link está vazio");
-        if(pontuacao.isBlank()) throw new IllegalArgumentException("O campo pontuação está vazio");
+        if(titulo.isEmpty()) throw new IllegalArgumentException("O campo título está vazio");
+        if(link.isEmpty()) throw new IllegalArgumentException("O campo link está vazio");
+        if(pontuacao.isEmpty()) throw new IllegalArgumentException("O campo pontuação está vazio");
         if(!link.startsWith("https://")) throw new IllegalArgumentException("Link inválido (Exemplo: https://site.com)");
-        if(disciplina.isBlank()) throw new IllegalArgumentException("É necessário que escolha uma disciplina");
+        if(disciplina.isEmpty()) throw new IllegalArgumentException("É necessário que escolha uma disciplina");
 
         Long idDaDisciplina = Long.parseLong(disciplina);
 
@@ -117,7 +117,7 @@ public class AtividadeDTO {
         atividade.setId(idFormatado);
         atividade.setNome(titulo);
 
-        if(!descricao.isBlank()) atividade.setDescricao(descricao);
+        if(!descricao.isEmpty()) atividade.setDescricao(descricao);
         atividade.setUrl(link);
         atividade.setDisciplina(disciplina.get());
         atividade.setPontuacao(pontuacao.replace(" pontos", "").replace(" ponto", ""));
