@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="partials :: pagina(~{::section}, 'Portal do Aluno', 'home')">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <section>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="titles">Disciplinas</h4>
+                <div class="row">
+                    <a th:href="@{/disciplina/{id}(id=${disciplina.id})}" class="card-disciplina clicavel card mt-3" th:each="disciplina : ${disciplinas}">
+                        <div class="card-body">
+                        <h5 class="card-title text-center" th:text="${disciplina.nome}"></h5>
+                        <!-- <p class="card-subtitle">Professora Patrícia</p> -->
+                        </div>
+                    </a>
+                </div>
+                <!-- Novo conteúdo -->
+                <h4 class="titles">Cronograma das Aulas</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="table-dark">
+                          <tr>
+                            <th scope="col">Horário</th>
+                            <th scope="col">Segunda</th>
+                            <th scope="col">Terça</th>
+                            <th scope="col">Quarta</th>
+                            <th scope="col">Quinta</th>
+                            <th scope="col">Sexta</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th>7:20 - 8:10</th>
+                            <td>Números</td>
+                            <td>Ed. Física</td>
+                            <td>Química</td>
+                            <td>Filosofia</td>
+                            <td>Matemática</td>
+                          </tr>
+                          <tr>
+                            <th>8:10 - 9:00</th>
+                            <td>Inglês</td>
+                            <td>Prod. de Texto</td>
+                            <td>Sociologia</td>
+                            <td>Inic. Científica</td>
+                            <td>Física</td>
+                          </tr>
+                          <tr>
+                            <th>9:00 - 9:50</th>
+                            <td>Geografia</td>
+                            <td>Números</td>
+                            <td>Biologia</td>
+                            <td>Português</td>
+                            <td>Biologia</td>
+                          </tr>
+                          <tr>
+                            <th>Intervalo</th>
+                            <td>######</td>
+                            <td>######</td>
+                            <td>######</td>
+                            <td>######</td>
+                            <td>######</td>
+                          </tr>
+                          <tr>
+                            <th>10:10 - 11:00</th>
+                            <td>Arte</td>
+                            <td>Prod. de Texto</td>
+                            <td>Projeto de Vida</td>
+                            <td>Português</td>
+                            <td>Protagonismo</td>
+                          </tr>
+                          <tr>
+                            <th>11:00 - 11:50</th>
+                            <td>Inic. Científica</td>
+                            <td>Matemática</td>
+                            <td>História</td>
+                            <td>Projeto de Vida</td>
+                            <td>Protagonismo</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- <h4 class="titles mb-4">Atividades <span class="badge badge-secondary">Novas</span></h4>
+                    <div class="alert alert-warning d-flex align-items-center justify-content-between" role="alert">
+                        <span>Nova atividade</span>
+                        <span class="btn btn-primary">Matemática</span>
+                    </div>
+                    <div class="alert alert-warning d-flex align-items-center justify-content-between" role="alert">
+                        <span>Nova atividade</span>
+                        <span class="btn btn-primary">Matemática</span>
+                    </div> -->
+        </div>
+    </section>
+</body>
+
+</html>

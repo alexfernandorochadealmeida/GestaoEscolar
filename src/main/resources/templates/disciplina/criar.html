@@ -1,0 +1,50 @@
+<html th:replace="partials :: pagina(~{::section},'Disciplina', 'disciplina')">
+  <body>
+    <section>
+        <div class="row">
+            <div class="col-sm-12 col-lg-5">
+                <h4 class="titles">Criar disciplina</h4>
+                <p th:text="${erro}">Mensagem de erro</p>
+                <form th:action="@{/admin/disciplina/criar}" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <label for="floatingInputValue">Nome da Disciplina</label>
+                            <input type="text" name="nomeDaDisciplina" class="form-control" id="floatingInputValue" placeholder="Ex: Matemática">
+                        </div>
+                        <div class="col">
+                            <label for="seletor">Professor responsável</label>
+                            <select class="form-select" name="nomeDoProfessor" id="seletor">
+                                <option value="" selected>Escolha um professor</option>
+                                <option th:value="${professor.email}" th:text="${professor.nome}" th:each="professor : ${professores}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary mt-3 w-5" style="width: 150px;" value="Criar" />
+                </form>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-sm-12 col-lg-6">
+                <h4 class="titles">Disciplinas</h4>
+                
+                <th:block th:if="${disciplinas.isEmpty}">
+                    <p>Não há nenhuma disciplina registrada</p>
+                </th:block>
+                <th:block th:if="${!disciplinas.isEmpty}">
+                    <div class="card mt-3" th:each="disciplina : ${disciplinas}" style="width: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <p class="card-title fw-bold">Professor <span th:text="${disciplina.professor.nome}"></span></p>
+                                <div>
+                                    <a th:href="@{/admin/disciplina/editar/{id}(id=${disciplina.id})}" class="btn btn-primary"><i class='bx bxs-edit' ></i></a>
+                                    <a th:href="@{/admin/disciplina/deletar/{id}(id=${disciplina.id})}" class="btn btn-danger ml-3"><i class='bx bxs-trash'></i></a>
+                                </div>
+                            </div>
+                            <p class="card-subtitle fst-italic" th:text="${disciplina.nome}">Alguma matéria</p>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </section>
+  </body>
+</html>

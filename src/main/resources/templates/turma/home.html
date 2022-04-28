@@ -1,0 +1,17 @@
+<html th:replace="partials :: pagina(~{::section}, 'Turma', 'turma')">
+    <body>
+        <section>
+            <div class="row">
+                <h1 class="titles">Turma</h1>
+                <div class="row">
+                    <a th:href="@{/perfil/{id}(id=${usuario.id})}" class="card text-dark" th:each="usuario : ${usuarios}" style="margin-right: 15px; margin-top: 15px;">
+                        <div class="card-body d-flex align-items-center rounded-circle">
+                            <img th:src="${usuario.fotoDePerfil}" style="width: 30px; border-radius: 50%;" alt="">
+                            <span th:text="${usuario.nome}" class="fs-6 text-center" style="margin-left: 25px;"></span>
+                        </div>    
+                    </a>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<html th:replace="partials :: pagina(~{::section}, 'Configurações', 'config')">
+    <body>
+        <section>
+            <div class="row">
+                <h2 class="titles">Configurações</h2>
+                <div class="col-lg-6">
+                    <form th:action="@{/config/salvar}" method="POST" enctype="multipart/form-data" th:object="${user}" class="form-group">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" th:value="${user.nome}" name="nome" class="form-control" id="nome">
+                                </div>
+                                <div class="col">
+                                    <fieldset disabled="disabled">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" th:value="${user.email}" name="email" class="form-control disabled" id="email">
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input type="text" th:value="${user.celular}" name="celular" class="form-control" id="telefone">
+                                </div>
+                                <div class="col">
+                                    <label for="sobremim" class="form-label">Descrição</label>
+                                    <input type="text" th:value="${user.sobremim}" name="sobremim" class="form-control text-start" id="sobremim">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="foto" class="form-label">Foto de perfil</label>
+                            <input type="file" name="foto" class="form-control" accept="image/jpg, image/png, image/jpeg" id="foto">
+                        </div>
+                        <input type="submit" value="Salvar" class="btn btn-success mt-3">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

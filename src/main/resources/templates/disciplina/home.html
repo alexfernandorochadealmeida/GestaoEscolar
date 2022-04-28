@@ -1,0 +1,30 @@
+<html th:replace="partials :: pagina(~{::section}, 'Disciplina', 'disciplina')">
+    <body>
+        <section>
+            <div class="row">
+                <h2 class="titles" th:text="${disciplina.nome}"></h2>
+                <div class="d-inline">
+                    <strong>Professor(a) </strong><span th:text="${disciplina.professor.nome}"></span> <br>
+                    <strong>Email </strong><span th:text="${disciplina.professor.email}"></span>
+                </div>
+                <h2 class="titles">Atividades</h2>
+                <th:block th:if="${atividades.isEmpty}"><p>Ainda não há nenhuma atividade nessa disciplina</p></th:block>
+                <th:block th:if="${!atividades.isEmpty}">
+                    <div class="card text-center mb-5" style="margin-right: 15px;" th:each="atividade : ${atividades}">
+                        <div class="card-header">
+                          <strong>Nova Atividade</strong>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title" th:text="${atividade.nome}"></h5>
+                          <p class="card-text" th:text="${atividade.descricao}"></p>
+                          <a th:href="${atividade.url}" class="btn btn-primary">Fazer a atividade</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                          <strong>Valendo <span th:text="${atividade.pontuacao}"></span></strong>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </section>
+    </body>
+</html>

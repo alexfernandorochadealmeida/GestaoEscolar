@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="pagina(content,title,nav)">
+<!-- HEAD -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/utils.css}">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <title th:text="${title}"></title>
+</head>
+
+<!-- RESTO DO CORPO -->
+
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+
+        <div class="header__img">
+            <th:block th:if="${usuarioLogado.fotoDePerfil}">
+                <a th:href="@{/perfil/{id}(id=${usuarioLogado.id})}">
+                    <img th:src="${usuarioLogado.fotoDePerfil}" alt="">
+                </a>
+            </th:block>
+        </div>
+
+    </header>
+
+    <div class="l-navbar" id="nav-bar" name="navfunc">
+        <nav class="nav">
+            <div>
+                <a href="#" class="nav__logo">
+                    <i class='bx bx-layer nav__logo-icon'></i>
+                    <span class="nav__logo-name">Painel do Aluno</span>
+                </a>
+
+                <div class="nav__list">
+                    <a th:classappend="${nav == 'home'} ? active" th:href="@{/}" class="nav__link">
+                    <i class='bx bx-grid-alt nav__icon' ></i>
+                        <span class="nav__name">Página Inicial</span>
+                    </a>
+
+                    <a th:classappend="${nav == 'turma'} ? active" th:href="@{/turma}" class="nav__link">
+                        <i class='bx bx-user nav__icon' ></i>
+                        <span class="nav__name">Turma</span>
+                    </a>
+<!--                     
+                    <a href="#" class="nav__link">
+                        <i class='bx bx-message-square-detail nav__icon' ></i>
+                        <span class="nav__name">Atividades</span>
+                    </a>
+
+                    <a href="#" class="nav__link">
+                        <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
+                        <span class="nav__name">Desempenho</span>
+                    </a> -->
+
+                    <a th:classappend="${nav == 'config'} ? active" th:href="@{/config}" class="nav__link">
+                        <i class='bx bx-cog nav__icon'></i>
+                        <span class="nav__name">Configurações</span>
+                    </a>
+
+
+                </div>
+            </div>
+
+            <a th:href="@{/sair}" class="nav__link">
+                <i class='bx bx-log-out nav__icon' ></i>
+                <span class="nav__name">Sair</span>
+            </a>
+        </nav>
+    </div>
+    <div th:replace="${content}"></div>
+    <script th:src="@{/js/main.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

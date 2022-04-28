@@ -1,0 +1,31 @@
+<html th:replace="partials :: pagina(~{::section},'Disciplina', 'disciplina')">
+  <body>
+    <section>
+        <div class="row">
+            <div class="col-sm-12 col-lg-5 border-right">
+                <h4 class="titles">Editar disciplina</h4>
+                <p th:text="${mensagem_de_erro}">Mensagem de erro</p>
+                <form action="" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <label for="floatingInputValue">Nome da Disciplina</label>
+                            <input type="text" th:value="${disciplina.nome}" name="nomeDaDisciplina" class="form-control" id="floatingInputValue" placeholder="Ex: Matemática">
+                        </div>
+                        <div class="col">
+                            <label for="seletor2">Professor responsável</label>
+                            <select class="form-select" name="nomeDoProfessor" id="seletor2">
+                                <option value=""><- Professor Selecionado -></option>
+                                <option th:value="disciplina.professor.email" th:text="${disciplina.professor.nome}" selected></option>
+                                <option value=""><- Outros Professores -></option>
+                                <option th:each="professor : ${professores}" th:value="${professor.email}" th:text="${professor.nome}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary mt-3 w-5" style="width: 150px;" value="Editar" />
+                </form>
+            </div>
+            </div>
+        </div>
+    </section>
+  </body>
+</html>

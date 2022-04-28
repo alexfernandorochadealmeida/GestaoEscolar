@@ -1,0 +1,290 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root{
+  --header-height: 3rem;
+  --nav-width: 68px;
+
+  /*===== Colors =====*/
+  /* --first-color: #4723D9;
+  --first-color-title: #7A5CF1;
+  --first-color-light: #AFA5D9;
+  --white-color: #F7F6FB;
+   */
+
+   --first-color: #0B132B;
+   --first-color-title: #1C2541;
+   --first-color-light: #3A506B;
+   --white-color: #F7F6FB;
+   
+
+  /*===== Font and typography =====*/
+  --body-font: 'Nunito', sans-serif;
+  --normal-font-size: 1rem;
+  
+  /*===== z index =====*/
+  --z-fixed: 100;
+}
+
+/*===== BASE =====*/
+*,::before,::after{
+  box-sizing: border-box;
+}
+
+body{
+  position: relative;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: .5s;
+}
+
+a{
+  text-decoration: none;
+}
+
+.card-disciplina:hover {
+  background-color: var(--first-color);
+  color: white;
+}
+
+.card-border {
+  border: 1px solid black;
+}
+
+.clicavel {
+  cursor: pointer;
+}
+
+/*===== HEADER =====*/
+.header{
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: var(--white-color);
+  z-index: var(--z-fixed);
+  transition: .5s;
+}
+
+.header__toggle{
+  color: var(--first-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.header__img{
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #0CF574;
+}
+
+.header__img a img{
+  width: 40px;
+}
+
+/*===== NAV =====*/
+.l-navbar{
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: var(--nav-width);
+  height: 100vh;
+  background-color: var(--first-color);
+  padding: .5rem 1rem 0 0;
+  transition: .5s;
+  z-index: var(--z-fixed);
+}
+
+.disciplina {
+  width: 300px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  border-radius: 25px;
+  transition: 0.2s ;
+  margin: 10px auto;
+}
+
+
+.disciplina:hover {
+  background-color: var(--first-color-title);
+  border: 1px solid var(--first-color-title);
+  color: white;
+  cursor: pointer;
+}
+
+.nav{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav__logo, .nav__link{
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 1rem;
+  padding: .5rem 0 .5rem 1.5rem;
+}
+
+.nav__logo{
+  margin-bottom: 2rem;
+}
+
+.nav__logo-icon{
+  font-size: 1.25rem;
+  color: var(--white-color);
+}
+
+.nav__logo-name{
+  color: var(--white-color);
+  font-weight: 700;
+}
+
+.nav__logo:hover {
+  text-decoration: none;
+}
+
+.nav__link{
+  position: relative;
+  color: var(--first-color-light);
+  margin-bottom: 1.5rem;
+  transition: .3s;
+}
+
+.nav__link:hover{
+  color: var(--white-color);
+  text-decoration: none;
+}
+
+.nav__icon{
+  font-size: 1.25rem;
+}
+
+.card-disciplina {
+  width: 440px;
+  margin: 0 auto;
+  transition: 0.5s;
+  color: black;
+}
+
+
+/*Show navbar movil*/
+.show{
+  left: 0px;
+}
+
+.btn-primary {
+  background-color: var(--first-color-light);
+  border: 0;
+}
+
+.btn-primary:hover {
+  background-color: var(--first-color);
+}
+
+.btn-primary:focus {
+  background-color: var(--first-color);
+  outline: none;
+}
+
+/*Add padding body movil*/
+.body-pd{
+  padding-left: calc(var(--nav-width) + 1rem);
+}
+
+/*Active links*/
+.active{
+  color: var(--white-color);
+}
+
+.active::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 32px;
+  background-color: var(--white-color);
+}
+
+.badge-secondary {
+  background-color: var(--first-color-title);
+}
+/* ===== MEDIA QUERIES=====*/
+@media screen and (max-width: 280px){
+  .card-disciplina {
+    width: 250px;
+    height: 70px;
+  }
+}
+
+@media screen and (min-width: 550px){
+  .card {
+    width: 300px;
+  }
+}
+
+
+@media screen and (min-width: 700px){
+
+  .disciplina {
+    margin: 10px 15px 10px 0;
+    width: 190px;
+  }
+  
+
+  .card-disciplina {
+    margin: 0 5px 0 0;
+    width: 200px;
+  }
+
+  body{
+    margin: calc(var(--header-height) + 1rem) 0 0 0;
+    padding-left: calc(var(--nav-width) + 2rem);
+  }
+
+  .header{
+    height: calc(var(--header-height) + 1rem);
+    padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+  }
+
+  .header__img{
+    width: 40px;
+    height: 40px;
+  }
+
+  .header__img a img{
+    width: 45px;
+  }
+
+  .l-navbar{
+    left: 0;
+    padding: 1rem 1rem 0 0;
+  }
+
+  
+  
+  /*Show navbar desktop 156px*/
+  .show{
+    width: calc(var(--nav-width) + 156px);
+  }
+
+  /*Add padding body desktop*/
+  .body-pd{
+    padding-left: calc(var(--nav-width) + 188px);
+  }
+}

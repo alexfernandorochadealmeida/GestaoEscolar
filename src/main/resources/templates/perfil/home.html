@@ -1,0 +1,46 @@
+<html th:replace="partials :: pagina (~{::section}, ${usuario.nome}, 'perfil')">
+    <body>
+        <section>
+            <div class="row">
+                <div class="col-xl-1 mt-3" style="margin-top: 45px;">
+                    <img th:src="${usuario.fotoDePerfil}" class="img-responsive center-block" alt="" style="width: 100px; border-radius: 50%;">
+                </div>
+                <div class="col-xl-1 mt-5" style="width: 700px;">
+                    <h2 class="titles d-inline" th:text="${usuario.nome}" style="font-size: 20px;"></h2> <br>
+                    <p th:text="${usuario.email}" class="fs-6 d-inline"></p> <br>
+                    <p th:text="${usuario.role}" class="fs-6 d-inline"></p>
+                </div>
+                <!-- <div class="mt-5">
+                    <h2 class="titles d-inline" th:text="${usuario.nome}" style="font-size: 20px;"></h2>
+                    <p th:text="${usuario.email}" class="fs-6 d-inline"></p>
+                </div> -->
+            </div>
+            <div class="mt-5">
+                <div class="mt-5">
+                    <h1 class="titles">Sobre mim</h1>
+                    <blockquote class="blockquote">
+                        <th:block th:if="${usuario.sobremim != null}">
+                            <p th:text="${usuario.sobremim}">A well-known quote, contained in a blockquote element.</p>
+                        </th:block>
+                        <th:block th:if="${usuario.sobremim == null}">
+                            <p>O usuário ainda não configurou um "SobreMim" adequadamente.</p>
+                        </th:block>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div class="mt-5">
+                    <h1 class="titles">Telefone</h1>
+                    <blockquote class="blockquote">
+                        <th:block th:if="${usuario.celular != null}">
+                            <p th:text="${usuario.celular}">A well-known quote, contained in a blockquote element.</p>
+                        </th:block>
+                        <th:block th:if="${usuario.celular == null}">
+                            <p>Não possuo telefone.</p>
+                        </th:block>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

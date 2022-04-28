@@ -1,0 +1,69 @@
+<html th:replace="partials :: pagina(~{::section},'Atividade', 'atividade')">
+  <body>
+    <section>
+        <div class="row">
+            <div class="col-sm-12 col-lg-5">
+                <h4 class="titles">Nova atividade</h4>
+                <p th:text="${mensagem_de_erro}">Erro</p>
+                <form th:action="@{/professor/atividade/criar}" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <label for="floatingInputValue">Título</label>
+                            <input type="text" name="titulo" class="form-control" id="floatingInputValue" placeholder="Ex: Simulado">
+                        </div>
+                        <div class="col">
+                            <label for="ab">Descrição (Opcional)</label>
+                            <input type="text" name="descricao" class="form-control" id="ab" placeholder="Descrição">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-9">
+                            <label for="link">Link da Atividade</label>
+                            <input type="text" name="link" class="form-control" id="link" placeholder="Google Forms">
+                        </div>
+                        <div class="col-3">
+                            <label for="pontuacao">Pontuação</label>
+                            <input type="text" name="pontuacao" class="form-control" id="pontuacao" placeholder="Ex: 0.5">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-5">
+                            <label for="disciplina">Disciplina</label>
+                            <select name="disciplina" id="disciplina" class="form-select">
+                                <option value="" selected>Escolha sua disciplina</option>
+                                <option th:value="${disciplina.id}" th:text="${disciplina.nome}" th:each="disciplina : ${disciplinas}"></option>
+                            </select>
+                        </div>
+                        <div class="col-7 mt-2">
+                            <label for="btn"></label>
+                            <input type="submit" class="btn btn-primary mt-3 w-5" style="width: 100%;" id="btn" value="Criar" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-sm-12 col-lg-6">
+                <h4 class="titles">Atividades</h4>
+                
+                <th:block th:if="${atividades.isEmpty}">
+                    <p>Não há atividade registrada</p>
+                </th:block>
+                <th:block th:if="${!atividades.isEmpty}">
+                    <div class="card mt-3" th:each="atividade : ${atividades}" style="width: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <p class="card-title fw-bold" th:text="${atividade.nome}"></p>
+                                <div>
+                                    <a th:href="@{/professor/atividade/editar/{id}(id=${atividade.id})}" class="btn btn-primary"><i class='bx bxs-edit' ></i></a>
+                                    <a th:href="@{/professor/atividade/deletar/{id}(id=${atividade.id})}" class="btn btn-danger ml-3"><i class='bx bxs-trash'></i></a>
+                                </div>
+                            </div>
+                            <p class="card-subtitle fst-italic" th:text="${atividade.descricao}">Alguma matéria</p>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </section>
+  </body>
+</html>
