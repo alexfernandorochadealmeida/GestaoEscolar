@@ -18,7 +18,7 @@ public class TurmaController {
 
     @GetMapping("/turma")
     public String home(Model model) {
-        List<User> usuarios = userRepository.findAll(); 
+        List<User> usuarios = (List<User>) userRepository.findAll(); 
         model.addAttribute("usuarios", usuarios);
         return "turma/home";
     }

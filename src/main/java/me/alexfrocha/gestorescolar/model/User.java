@@ -30,6 +30,7 @@ public class User {
     private String role;
 
     public boolean verificandoPermissao(CargoEnum cargo) {
+        if(this.role == null) return false;
         return this.role.equals(cargo.name());
     }
 
@@ -73,6 +74,7 @@ public class User {
     }
 
     public String getCelular() {
+        if(this.celular == null) return "Nada informado";
         return this.celular;
     }
 
@@ -81,6 +83,7 @@ public class User {
     }
 
     public String getSobremim() {
+        if(this.sobremim == null) return "Nada informado";
         return this.sobremim;
     }
 

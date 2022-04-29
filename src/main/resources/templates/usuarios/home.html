@@ -1,0 +1,86 @@
+
+<html th:replace="partials :: pagina(~{::section}, 'Usuários', 'usuarios')">
+    <body>
+        <section>
+            <div class="row">
+                <h2 class="titles">Usuários</h2>
+                <form th:action="@{/admin/usuarios/procurando}" method="POST" class="form-group">
+                    <label class="form-label" for="email">Informe um email</label>
+                    <input class="form-control" type="text" name="email" id="email" style="width: 500px;">
+                    <input type="submit" class="btn btn-primary mt-2" value="Procurar">
+                </form>
+                <p class="fs-6 mt-4"><span th:text="${usuariosEncontrados}">a</span> resultados foram encontrados</p>
+                <form th:action="@{/admin/usuarios/salvar}" method="POST">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-dark">
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Conta ativa</th>
+                            </thead>
+                            <tbody>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <input type="hidden" name="idUsuario" th:value="${usuario.id}">
+                                    <th scope="row" th:text="${usuario.id}"></th>
+                                    <td th:text="${usuario.nome}"></td>
+                                    <td th:text="${usuario.getCelular}"></td>
+                                    <td th:text="${usuario.getSobremim}"></td>
+                                    <td th:text="${usuario.email}"></td>
+                                    <td>
+                                        <select class="form-select" name="role" id="">
+                                            <option th:selected="${cargo.name} == ${usuario.role}" th:value="${cargo}" th:text="${cargo}" th:each="cargo : ${Cargos}"></option>
+                                        </select>
+                                    </td>
+                                    <td class="d-flex">
+                                        <select style="width: 100px;"  class="form-select" name="enabled" id="">
+                                            <option th:selected="${boolean} == ${usuario.enabled}" th:value="${boolean}" th:text="${boolean}" th:each="boolean : ${booleanos}"></option>
+                                        </select>
+                                        <a th:href="@{?email={email}(email=${usuario.email})}" class="btn btn-primary" style="font-size: 25px; margin-left: 15px;">
+                                            <i class='bx bx-edit'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+        
+                                <li th:classappend="${!usuariosPage.hasPrevious} ? disabled" class="page-item">
+                                    <th:block th:if="${paginaVerificada == 0}">
+                                        <a class="page-link" href="">Anterior</a>
+                                    </th:block>
+                                  <th:block th:if="${paginaVerificada != 0}">
+                                      <a class="page-link" th:href="@{?pagina={id}(id=${paginaVerificada - 1})}">Anterior</a>
+                                  </th:block>
+                                </li>
+        
+                              <li th:classappend="${paginaVerificada == iterator.index} ? active" class="page-item" th:each="pagina,iterator : ${paginas}">
+                                  <a class="page-link" th:href="@{?pagina={id}(id=${iterator.index})}" th:text="${pagina}"></a>
+                                </li>
+        
+                              <li th:classappend="${!usuariosPage.hasNext} ? disabled" class="page-item">
+                                <th:block th:if="${paginaVerificada == 0}">
+                                    <a class="page-link" th:href="@{?pagina=1}">Próximo</a>
+                                </th:block>
+                                <th:block th:if="${paginaVerificada != 0}">
+                                    <a class="page-link" th:href="@{?pagina={id}(id=${paginaVerificada + 1})}">Próximo</a>
+                                </th:block>
+                              </li>
+        
+                            </ul>
+                        </nav>
+                        <th:block th:if="${param.email != null}">
+                            <input type="submit" value="Salvar" class="btn btn-primary" style="height: 35px; width: 90px;">
+                        </th:block>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
