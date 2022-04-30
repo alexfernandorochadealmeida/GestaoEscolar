@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="partials :: pagina(~{::section}, 'Portal do Aluno', 'home')">
+<html lang="en" th:replace="partials :: pagina(~{::dashboard}, 'Gestor Escolar', 'home')">
 <head>
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <section>
+    <!-- Painel do Aluno -->
+    <th:block th:if="${usuarioLogado.role == 'ALUNO'}" th:fragment="dashboard">
+      <section>
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="titles">Disciplinas</h4>
@@ -84,18 +86,52 @@
                     </table>
                 </div>
             </div>
-
-            <!-- <h4 class="titles mb-4">Atividades <span class="badge badge-secondary">Novas</span></h4>
-                    <div class="alert alert-warning d-flex align-items-center justify-content-between" role="alert">
-                        <span>Nova atividade</span>
-                        <span class="btn btn-primary">Matemática</span>
-                    </div>
-                    <div class="alert alert-warning d-flex align-items-center justify-content-between" role="alert">
-                        <span>Nova atividade</span>
-                        <span class="btn btn-primary">Matemática</span>
-                    </div> -->
         </div>
     </section>
+    </th:block>
+
+
+    <!-- PAINEL DO PROFESSOR -->
+    <th:block th:if="${usuarioLogado.role == 'PROFESSOR'}" th:fragment="dashboard">
+      <section>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="titles">Disciplinas</h4>
+                <div class="row">
+                    <th:block th:if="${!disciplinas2.isEmpty}">
+                    <a th:href="@{/disciplina/{id}(id=${disciplina.id})}" class="card-disciplina clicavel card mt-3" th:each="disciplina : ${disciplinas2}">
+                        <div class="card-body">
+                        <h5 class="card-title text-center" th:text="${disciplina.nome}"></h5>
+                        <!-- <p class="card-subtitle">Professora Patrícia</p> -->
+                        </div>
+                    </a>
+                    </th:block>
+                    <th:block th:if="${disciplinas2.isEmpty}"> 
+                      <p>Você ainda não é responsável por nenhuma disciplina</p>
+                    </th:block>
+                </div>
+                <h4 class="titles">Atividades <a th:href="@{/professor/atividades}" class="badge bg-primary text-decoration-none criar">Criar</a></h4>
+                <th:block th:if="${atividades.isEmpty}"><p>Ainda não há nenhuma atividade nessa disciplina</p></th:block>
+                <th:block th:if="${!atividades.isEmpty}">
+                    <div class="card text-center mb-5" style="margin-right: 15px;" th:each="atividade : ${atividades}">
+                        <div class="card-header">
+                          <strong>Nova Atividade</strong>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title" th:text="${atividade.nome}"></h5>
+                          <p class="card-text" th:text="${atividade.descricao}"></p>
+                          <a th:href="${atividade.url}" class="btn btn-primary">Fazer a atividade</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                          <strong>Valendo <span th:text="${atividade.pontuacao}"></span></strong>
+                        </div>
+                    </div>
+                </th:block>
+
+              </div>
+        </div>
+    </section>
+    </th:block>
 </body>
 
 </html>

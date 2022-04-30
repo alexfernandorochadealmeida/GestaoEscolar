@@ -35,20 +35,60 @@
             <div>
                 <a href="#" class="nav__logo">
                     <i class='bx bx-layer nav__logo-icon'></i>
-                    <span class="nav__logo-name">Painel do Aluno</span>
+                    <th:block th:switch="${usuarioLogado.role}">
+                        <span class="nav__logo-name" th:case="'ALUNO'">Painel do Aluno</span>
+                        <span class="nav__logo-name" th:case="'PROFESSOR'">Painel do Professor</span>
+                        <span class="nav__logo-name" th:case="'ADMIN'">Painel do Admin</span>
+                    </th:block>
                 </a>
 
                 <div class="nav__list">
-                    <a th:classappend="${nav == 'home'} ? active" th:href="@{/}" class="nav__link">
-                    <i class='bx bx-grid-alt nav__icon' ></i>
-                        <span class="nav__name">Página Inicial</span>
-                    </a>
+                    <th:block th:if="${usuarioLogado.role != 'ADMIN'}">
+                        <a th:classappend="${nav == 'home'} ? active" th:href="@{/}" class="nav__link">
+                            <i class='bx bx-grid-alt nav__icon' ></i>
+                                <span class="nav__name">Página Inicial</span>
+                        </a>
+                    </th:block>
 
-                    <a th:classappend="${nav == 'turma'} ? active" th:href="@{/turma}" class="nav__link">
-                        <i class='bx bx-user nav__icon' ></i>
-                        <span class="nav__name">Turma</span>
-                    </a>
+                    <th:block th:if="${usuarioLogado.role == 'ALUNO'}">
+                        <a th:classappend="${nav == 'turma'} ? active" th:href="@{/turma}" class="nav__link">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__name">Turma</span>
+                        </a>
+                    </th:block>
+
+                    
+                    <th:block th:if="${usuarioLogado.role == 'PROFESSOR' || usuarioLogado.role == 'ADMIN'}">
+                        <a th:classappend="${nav == 'turma'} ? active" th:href="@{/turma}" class="nav__link">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__name">Usuários</span>
+                        </a>
+                    </th:block>
+
+                    <th:block th:if="${usuarioLogado.role == 'PROFESSOR'}">
+                        <a th:classappend="${nav == 'atividade'} ? active" th:href="@{/professor/atividades}" class="nav__link">
+                            <i class='bx bx-message-square-detail nav__icon' ></i>
+                            <span class="nav__name">Atividades</span>
+                        </a>
+                    </th:block>
+                    
+                    <th:block th:if="${usuarioLogado.role == 'ADMIN'}">
+                        <a th:classappend="${nav == 'usuarios'} ? active" th:href="@{/admin/usuarios}" class="nav__link">
+                            <i class='bx bxs-user-detail nav__icon' ></i>
+                            <span class="nav__name">Gerenc. Usuários</span>
+                        </a>
+                    </th:block>
+
+                    
+                    <th:block th:if="${usuarioLogado.role == 'ADMIN'}">
+                        <a th:classappend="${nav == 'disciplina'} ? active" th:href="@{/admin/disciplinas}" class="nav__link">
+                            <i class='bx bx-book-bookmark nav__icon' ></i>
+                            <span class="nav__name">Gerenc. Disciplinas</span>
+                        </a>
+                    </th:block>
+
 <!--                     
+
                     <a href="#" class="nav__link">
                         <i class='bx bx-message-square-detail nav__icon' ></i>
                         <span class="nav__name">Atividades</span>

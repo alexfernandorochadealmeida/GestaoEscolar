@@ -2,9 +2,18 @@
     <body>
         <section>
             <div class="row">
-                <h1 class="titles">Turma</h1>
+                <h1 class="titles">Turma</h1><div class="row">
+                    <h4 class="mt-5">Professores</h4>
+                    <a th:href="@{/perfil/{id}(id=${professor.id})}" class="card card-user text-dark" th:each="professor : ${professores}" style="margin-right: 15px; margin-top: 15px;">
+                        <div class="card-body d-flex align-items-center rounded-circle">
+                            <img th:src="${professor.fotoDePerfil}" style="width: 30px; border-radius: 50%;" alt="">
+                            <span th:text="${professor.nome}" class="fs-6 text-center" style="margin-left: 25px;"></span>
+                        </div>    
+                    </a>
+                </div>
+                <h4 class="mt-5">Alunos</h4>
                 <div class="row">
-                    <a th:href="@{/perfil/{id}(id=${usuario.id})}" class="card text-dark" th:each="usuario : ${usuarios}" style="margin-right: 15px; margin-top: 15px;">
+                    <a th:href="@{/perfil/{id}(id=${usuario.id})}" class="card card-user text-dark" th:each="usuario : ${usuarios}" style="margin-right: 15px; margin-top: 15px;">
                         <div class="card-body d-flex align-items-center rounded-circle">
                             <img th:src="${usuario.fotoDePerfil}" style="width: 30px; border-radius: 50%;" alt="">
                             <span th:text="${usuario.nome}" class="fs-6 text-center" style="margin-left: 25px;"></span>

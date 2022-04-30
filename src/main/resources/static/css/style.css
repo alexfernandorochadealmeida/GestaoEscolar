@@ -225,11 +225,15 @@ a{
   background-color: var(--first-color-title);
 }
 
-.card:hover {
+.card-user:hover {
   background-color: var(--first-color);
 }
 
-.card:hover .card-body {
+.criar:hover {
+  color: #fff;
+}
+
+.card-user:hover .card-body {
   color: white;
 }
 /* ===== MEDIA QUERIES=====*/

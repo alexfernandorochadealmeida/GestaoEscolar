@@ -18,8 +18,12 @@ public class TurmaController {
 
     @GetMapping("/turma")
     public String home(Model model) {
-        List<User> usuarios = (List<User>) userRepository.findAll(); 
+        List<User> usuarios = (List<User>) userRepository.findByRole("ALUNO"); 
+        List<User> professores = (List<User>) userRepository.findByRole("PROFESSOR");
+        List<User> admin = (List<User>) userRepository.findByRole("ADMIN");  
         model.addAttribute("usuarios", usuarios);
+        model.addAttribute("professores", professores);
+        model.addAttribute("admin", admin);
         return "turma/home";
     }
 }

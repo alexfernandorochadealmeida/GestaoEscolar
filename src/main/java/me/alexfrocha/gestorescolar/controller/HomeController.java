@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,14 +27,14 @@ public class HomeController {
     private DisciplinaRepository disciplinaRepository;
 
     @GetMapping
-    public ModelAndView paginaInicial() {
-        ModelAndView mv = new ModelAndView("dashboard");
+    public String paginaInicial(Model model) {
         User usuario = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Disciplina> disciplinas = disciplinaRepository.findAll();
-        mv.addObject("usuario", usuario);
-        mv.addObject("verificandoSeEAluno", usuario.verificandoPermissao(CargoEnum.ALUNO));
-        mv.addObject("disciplinas", disciplinas);
-        return mv;
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("verificandoSeEAluno", usuario.verificandoPermissao(CargoEnum.ALUNO));
+        model.addAttribute("disciplinas", disciplinas);
+        if(usuario.getRole().equals("ADMIN")) return "redirect:/admin/usuarios";
+        return "dashboard";
     }
 
 
