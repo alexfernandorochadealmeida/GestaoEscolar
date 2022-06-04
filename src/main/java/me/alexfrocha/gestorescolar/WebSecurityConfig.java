@@ -39,12 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        // UserDetails user = User.builder()
-        // .username("alexfernandorochadealmeida@gmail.com")
-        // .password(encoder.encode("Herbert!23"))
-        // .roles("Diretor")
-        // .build();
-
         String authorityQuery = "SELECT email,role FROM users WHERE email=?";
         String userQuery = "SELECT email,senha,enabled FROM users WHERE email=?";
 
